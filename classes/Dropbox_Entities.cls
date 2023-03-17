@@ -202,4 +202,9 @@ public class Dropbox_Entities {
             size = (Long) content.get('size');
         }
     }
+
+    // download file
+    public class downLoadFileDto {
+        public String path;
+    }
 }

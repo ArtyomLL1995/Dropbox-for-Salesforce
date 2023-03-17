@@ -153,12 +153,33 @@ public class Dropbox_Service {
         return result;
     }
 
-    // downloads a file
-    // public static void downLoad() {
-    //     HttpRequest req = new HttpRequest();
-    //     req.setEndpoint('callout:DropboxContent/files/download');
-    //     req.setMethod('POST');
-    // }
+    // get file content as blob, so it can be passed to LWC component for download or
+    // to other APEX method to create ContentDocument
+    
+    public static String downLoadFile(String path) {
+
+        Dropbox_Entities.downLoadFileDto file = new Dropbox_Entities.downLoadFileDto();
+        file.path = path;
+
+        String dropboxAPIArg = JSON.serialize(file);
+
+        HttpRequest req = new HttpRequest();
+        req.setEndpoint('callout:DropboxContent/files/download');
+        req.setHeader('Dropbox-API-Arg', dropboxAPIArg);
+        req.setHeader('Dropbox-API-Path-Root', dropBoxApiPathRoot);
+        req.setMethod('POST');
+
+        Http http = new Http();
+        HTTPResponse res = http.send(req);
+
+        if (res.getStatusCode() == 200) {
+            DateTime dtAfter = DateTime.now();
+            Long gettimeAfter = dtAfter.getTime();  
+            return EncodingUtil.base64Encode(res.getBodyAsBlob());
+        } else {
+            return null;
+        }
+    }
 
     // delets folder or file under specified path
     public static Dropbox_Entities.DeletedContentParser deleteContent(String path) {
