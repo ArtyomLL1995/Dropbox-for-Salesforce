@@ -31,7 +31,7 @@ public class Dropbox_Api {
         Map<String, String> headers = new Map<String, String>();
         headers.put('Content-Type', 'application/x-www-form-urlencoded');
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url' + Dropbox_Utils.ACCESS_TOKEN, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL + Dropbox_Utils.ACCESS_TOKEN, Dropbox_Utils.POST, headers, requestBody, null);
 
         if (res.getStatusCode() == 200) {
             Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(res.getBody());
@@ -80,7 +80,7 @@ public class Dropbox_Api {
 
         Blob requestBody = contentVersion != null ? contentVersion.VersionData : EncodingUtil.base64Decode(base64);
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_content_url' + Dropbox_Utils.FILES_UPLOAD, Dropbox_Utils.POST, headers, null, requestBody);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.CONTENT_URL + Dropbox_Utils.FILES_UPLOAD, Dropbox_Utils.POST, headers, null, requestBody);
 
         if(res.getStatusCode() == 200){
             String data = res.getBody();
@@ -111,7 +111,7 @@ public class Dropbox_Api {
             headers.put('Dropbox-API-Select-User', dropboxAPISelectUser);
         }
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.CREATE_FOLDER, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.CREATE_FOLDER, Dropbox_Utils.POST, headers, requestBody, null);
         
         if(res.getStatusCode() == 200) {
             String data = res.getBody();
@@ -135,7 +135,7 @@ public class Dropbox_Api {
         fileEntry.autorename = true;
 
         String requestBody = JSON.serialize(fileEntry);
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.COPY, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.COPY, Dropbox_Utils.POST, headers, requestBody, null);
 
         // Handle the response
         if (res.getStatusCode() == 200) {
@@ -166,7 +166,7 @@ public class Dropbox_Api {
 
         String requestBody = JSON.serialize(filesEntries);
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.COPY_BATCH, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.COPY_BATCH, Dropbox_Utils.POST, headers, requestBody, null);
 
         // Handle the response
         if (res.getStatusCode() == 200) {
@@ -188,7 +188,7 @@ public class Dropbox_Api {
 
         String requestBody = JSON.serialize(requestBodyMap);
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.COPY_BATCH_CHECK, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.COPY_BATCH_CHECK, Dropbox_Utils.POST, headers, requestBody, null);
 
         // Handle the response
         if (res.getStatusCode() == 200) {
@@ -230,7 +230,7 @@ public class Dropbox_Api {
 
         String requestBody = JSON.serialize(searchBody);
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.SEARCH, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.SEARCH, Dropbox_Utils.POST, headers, requestBody, null);
 
         if (res.getStatusCode() == 200) {
             String data = res.getBody();
@@ -252,7 +252,7 @@ public class Dropbox_Api {
         headers.put('Dropbox-API-Path-Root', dropBoxApiPathRoot);
         headers.put('Authorization', 'Bearer ' + accessToken);
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_content_url' + Dropbox_Utils.DOWNLOAD_FILE, Dropbox_Utils.POST, headers, null, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.CONTENT_URL + Dropbox_Utils.DOWNLOAD_FILE, Dropbox_Utils.POST, headers, null, null);
 
         if (res.getStatusCode() == 200) { 
             return EncodingUtil.base64Encode(res.getBodyAsBlob());
@@ -272,7 +272,7 @@ public class Dropbox_Api {
         headers.put('Dropbox-API-Path-Root', dropBoxApiPathRoot);
         headers.put('Authorization', 'Bearer ' + accessToken);
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_content_url' + Dropbox_Utils.DOWNLOAD_FILE_ZIP, Dropbox_Utils.POST, headers, null, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.CONTENT_URL + Dropbox_Utils.DOWNLOAD_FILE_ZIP, Dropbox_Utils.POST, headers, null, null);
 
         if (res.getStatusCode() == 200) { 
             return EncodingUtil.base64Encode(res.getBodyAsBlob());
@@ -297,7 +297,7 @@ public class Dropbox_Api {
 
         String requestBody = JSON.serialize(contentToDelete);
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.DELETE_FILES, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.DELETE_FILES, Dropbox_Utils.POST, headers, requestBody, null);
 
         if (res.getStatusCode() != 200) {
             throw new DropboxApiException(res.getBody());
@@ -315,7 +315,7 @@ public class Dropbox_Api {
 
         String requestBody = JSON.serialize(entries);
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.DELETE_FILES_BATCH, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.DELETE_FILES_BATCH, Dropbox_Utils.POST, headers, requestBody, null);
 
         if (res.getStatusCode() == 200) {
             String data = res.getBody();
@@ -341,7 +341,7 @@ public class Dropbox_Api {
         headers.put('Content-Type', 'application/json');
         headers.put('Authorization', 'Bearer ' + accessToken);
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.DELETE_FILES_BATCH_CHECK, Dropbox_Utils.POST, headers, JSON.serialize(requestBody), null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.DELETE_FILES_BATCH_CHECK, Dropbox_Utils.POST, headers, JSON.serialize(requestBody), null);
 
         if (res.getStatusCode() == 200) {
             Map<String, Object> deleteBatchStatusMap = (Map<String, Object>) JSON.deserializeUntyped(res.getBody());
@@ -372,7 +372,7 @@ public class Dropbox_Api {
             headers.put('Dropbox-API-Select-Admin', dropboxAPISelectUser);
         }
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.CONTENT_METADATA, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.CONTENT_METADATA, Dropbox_Utils.POST, headers, requestBody, null);
 
         if(res.getStatusCode() == 200) {
             result = new Dropbox_Entities.ContentFolderEntryParser(res.getBody());
@@ -415,7 +415,7 @@ public class Dropbox_Api {
 
         requestBody += mapStr;
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.GET_CONTENT_OF_A_FOLDER, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.GET_CONTENT_OF_A_FOLDER, Dropbox_Utils.POST, headers, requestBody, null);
 
         if (res.getStatusCode() == 200) {
             Dropbox_Entities.ContentFolderParser content = new Dropbox_Entities.ContentFolderParser(res.getBody());
@@ -444,7 +444,7 @@ public class Dropbox_Api {
 
         String requestBody = JSON.serialize(cursorMap);
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.GET_NEXT_CHUNK_OF_CONTENT, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.GET_NEXT_CHUNK_OF_CONTENT, Dropbox_Utils.POST, headers, requestBody, null);
 
         if (res.getStatusCode() == 200) {
             Dropbox_Entities.ContentFolderParser content = new Dropbox_Entities.ContentFolderParser(res.getBody());
@@ -462,7 +462,7 @@ public class Dropbox_Api {
 
         String requestBody = '{"limit": '+ numberOfAccountsToReturn +', "include_removed": false}';
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.GET_TEAM_MEMBER_ID, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.GET_TEAM_MEMBER_ID, Dropbox_Utils.POST, headers, requestBody, null);
 
         if (res.getStatusCode() == 200) {
 
@@ -491,7 +491,7 @@ public class Dropbox_Api {
             headers.put('Dropbox-API-Select-Admin', dropboxAPISelectUser);
         }
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.GET_CURRENT_ACCOUNT, Dropbox_Utils.POST, headers, null, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.GET_CURRENT_ACCOUNT, Dropbox_Utils.POST, headers, null, null);
 
         if(res.getStatusCode() == 200){
             String data = res.getBody();
@@ -516,7 +516,7 @@ public class Dropbox_Api {
         headers.put('Content-Type', 'application/json');
         headers.put('Authorization', 'Bearer ' + accessToken);
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.MOVE_FILES, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.MOVE_FILES, Dropbox_Utils.POST, headers, requestBody, null);
 
         if (res.getStatusCode() != 200) {
             throw new DropboxApiException('Erorr renaming file: ' + res.getBody());
@@ -545,7 +545,7 @@ public class Dropbox_Api {
 
         String requestBody = JSON.serialize(fileEntries);
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.MOVE_FILES_BATCH, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.MOVE_FILES_BATCH, Dropbox_Utils.POST, headers, requestBody, null);
 
         // Handle the response
         if (res.getStatusCode() == 200) {
@@ -566,7 +566,7 @@ public class Dropbox_Api {
         requestBodyMap.put('async_job_id', asyncJobId);
         String requestBody = JSON.serialize(requestBodyMap);
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.MOVE_FILES_BATCH_CHECK, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.MOVE_FILES_BATCH_CHECK, Dropbox_Utils.POST, headers, requestBody, null);
 
         // Handle the response
         if (res.getStatusCode() == 200) {
@@ -586,7 +586,7 @@ public class Dropbox_Api {
 
         String requestBody = '{"path" : "' + filePath + '"}';
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_base_url_v2' + Dropbox_Utils.GET_FILE_PREVIEW_LINK, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.BASE_URL_V2 + Dropbox_Utils.GET_FILE_PREVIEW_LINK, Dropbox_Utils.POST, headers, requestBody, null);
 
         if (res.getStatusCode() == 200) {
             Map<String, Object> responseMap = (Map<String, Object>) JSON.deserializeUntyped(res.getBody());
@@ -605,7 +605,7 @@ public class Dropbox_Api {
         headers.put('Dropbox-API-Arg', '{"path":"/' + path + '"}');
         headers.put('Content-Type', 'application/octet-stream');
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_content_url' + Dropbox_Utils.GET_THUMBNAIL, Dropbox_Utils.GET, headers, null, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.CONTENT_URL + Dropbox_Utils.GET_THUMBNAIL, Dropbox_Utils.GET, headers, null, null);
 
         if (res.getStatusCode() == 200) {
             return EncodingUtil.base64Encode(res.getBodyAsBlob());
@@ -626,7 +626,7 @@ public class Dropbox_Api {
         headers.put('Authorization', 'Bearer ' + accessToken);
         headers.put('Content-Type', 'application/json');
 
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:dropbox_content_url' + Dropbox_Utils.GET_THUMBNAIL_BATCH, Dropbox_Utils.POST, headers, requestBody, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(Dropbox_Utils.CONTENT_URL + Dropbox_Utils.GET_THUMBNAIL_BATCH, Dropbox_Utils.POST, headers, requestBody, null);
 
         if (res.getStatusCode() == 200) {
             Dropbox_Entities.GetThumbnailButchEntries entries = 

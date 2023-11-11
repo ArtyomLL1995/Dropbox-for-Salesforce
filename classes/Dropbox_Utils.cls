@@ -2,6 +2,10 @@ public class Dropbox_Utils {
 
     public static final String GET = 'GET';
     public static final String POST = 'POST';
+
+    public static final String BASE_URL = 'https://api.dropboxapi.com';
+    public static final String BASE_URL_V2 = 'https://api.dropboxapi.com/2';
+    public static final String CONTENT_URL = 'https://content.dropboxapi.com/2';
     
     public static final String ACCESS_TOKEN = '/oauth2/token';
     public static final String FILES_UPLOAD = '/files/upload';
