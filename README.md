@@ -4,7 +4,7 @@ In Dropbox_Service class there are number of methods that allow to interact with
 
 Before configuring Salesforce you must have a Dropbox account and a properly setup connected app in Dropbox account. To create connected app in Dropbox go to https://www.dropbox.com/developers -> App Console -> Create App
 
-After you create your connected app in Dropbox you can setup Named Credentials and Auth Provider in Salesforce so you can have access to Dropbox API.
+After you create your connected app in Dropbox you can setup Named Credentials and Auth Provider in Salesforce so you can have access to Dropbox API. Or you can use Dropbox_Api.getAccessToken() method to get access token directly from Dropbox.
 
 1. Create Auth provider. Go to your org. Setup -> auth provider -> click 'New'
 Provider type : Open ID Connect. Choose any name, for example : Dropbox;
