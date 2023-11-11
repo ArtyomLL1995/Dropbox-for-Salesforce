@@ -1,6 +1,13 @@
 public class Dropbox_Entities {
 
-    //Uupload file
+    public class AccessTokenDto {
+        public String accessToken;
+        public String refreshToken;
+        public Integer expiresIn;
+        public String clientId;
+        public String clientSecret;
+        public String rootId;
+    }
 
     public class UploadFileDto {
         public String path;
@@ -19,11 +26,17 @@ public class Dropbox_Entities {
         public String server_modified;
     }
 
-    // Create folder
-
     public class NewFolderToCreateDto {
         public String path;
         public Boolean autorename;
+    }
+
+    public class DeleteFolderDto {
+        public String path;
+    }
+
+    public class CreatedFolderInfoDto {
+        public CreatedFolderMetadataDto metadata;
     }
 
     public class CreatedFolderMetadataDto {
@@ -33,58 +46,16 @@ public class Dropbox_Entities {
         public String id;
     }
 
-    public class CreatedFolderInfoDto {
-        public CreatedFolderMetadataDto metadata;
-    }
-
-    // Delete content
-
-    public class DeleteContentDto {
-        public String path;
-    }
-
-    public class DeletedContentParser {
-        public DeletedContentMetadataParser metadata;
-        public DeletedContentParser(String data) {
-            Map<String, Object> content = (Map<String, Object>)JSON.deserializeUntyped(data);
-            Map<String, Object> contentMetadata = (Map<String, Object>) content.get('metadata');
-            metadata = new DeletedContentMetadataParser(contentMetadata);
-        }
-    }
-
-    public class DeletedContentMetadataParser {
-        public String tag;
-        public String name;
-        public String path_display;
-        public String id;
-        public String client_modified;
-        public String server_modified;
-        public Long size;
-        DeletedContentMetadataParser(Map<String, Object> metadata) {
-            tag = (String) metadata.get('.tag');
-            name = (String) metadata.get('name');
-            path_display = (String) metadata.get('path_display');
-            id = (String) metadata.get('id');
-            client_modified = (String) metadata.get('client_modified');
-            server_modified = (String) metadata.get('server_modified');
-            size = (Long) metadata.get('size');
-        }
-    }
-
-    // Get file or folder metadata
-
-    public class GetContentMetadataDto {
+    public class GetFolderMetadataDto {
         public Boolean include_deleted;
         public Boolean include_has_explicit_shared_members;
         public Boolean include_media_info;
         public String path;
     }
 
-    // Get content of a folder
-
     public class GetContentFolderDto {
         public String path;
-        public Boolean recursive; // if 'true' returns also content of all subfolders
+        public Boolean recursive;
         public Boolean include_media_info;
         public Boolean include_deleted;
         public Boolean include_has_explicit_shared_members;
@@ -92,50 +63,20 @@ public class Dropbox_Entities {
         public Boolean include_non_downloadable_files;
     }
 
-    public class ContentFolderParser {
-        public List<ContentFolderEntryParser> entries = new List<ContentFolderEntryParser>();
-
-        public ContentFolderParser(String data) {
-            Map<String, Object> responseMap = (Map<String, Object>)JSON.deserializeUntyped(data);
-            List<Map<String, Object>> entries = new List<Map<String, Object>>();
-            for (Object instance : (List<Object>)responseMap.get('entries')) entries.add((Map<String, Object>)instance);
-            for (Map<String, Object> entry : entries) this.entries.add(new ContentFolderEntryParser(entry)); 
-        }
-    }
-
-    public class ContentFolderEntryParser {
-        public String tag; // in json: .tag
-        public String name; 
-        public String path_lower;
-        public String path_display;
-
-        public ContentFolderEntryParser(Map<String, Object> content) {
-            tag = (String) content.get('.tag');
-            name = (String) content.get('name');
-            path_lower = (String) content.get('path_lower');
-            path_display = (String) content.get('path_display');
-        }
-
-        public ContentFolderEntryParser(String data) {
-            Map<String, Object> content = (Map<String, Object>)JSON.deserializeUntyped(data);
-            tag = (String) content.get('.tag');
-            name = (String) content.get('name');
-            path_lower = (String) content.get('path_lower');
-        }
-    }
-
-    // Get account info
-
     public class GetAccountInfoDto {
         public String team_member_id;
         public RootInfoDto root_info;
+        public AccountNameInfo name;
+        public String email;
     }
 
     public class RootInfoDto {
         public String root_namespace_id;
     }
 
-    // Get team memebers info
+    public class AccountNameInfo {
+        public String display_name;
+    }
 
     public class GetTeamMembersDto {
         public List<TeamMemberDto> members;
@@ -150,14 +91,60 @@ public class Dropbox_Entities {
         public String email;
     }
 
-    // Search
+    public class ContentFolderParser {
 
-    public class SearchDto {
-        public String query;
-        public Boolean include_highlights;
+        public List<ContentFolderEntryParser> entries = new List<ContentFolderEntryParser>();
+        public String cursor;
+        public Boolean has_more;
+
+        public ContentFolderParser(String data) {
+            Map<String, Object> responseMap = (Map<String, Object>)JSON.deserializeUntyped(data);
+            List<Map<String, Object>> entries = new List<Map<String, Object>>();
+            for (Object instance : (List<Object>)responseMap.get('entries')) entries.add((Map<String, Object>)instance);
+            for (Map<String, Object> entry : entries) this.entries.add(new ContentFolderEntryParser(entry)); 
+            cursor = (String) responseMap.get('cursor');
+            has_more = (Boolean) responseMap.get('has_more');
+        }
+    }
+
+    public class ContentFolderEntryParser {
+
+        public String tag; // in json: .tag
+        public String name; 
+        public String path_lower;
+        public String path_display;
+        public String client_modified;
+        public Long size;
+
+        public ContentFolderEntryParser(Map<String, Object> content) {
+            parseContent(content);
+        }
+
+        public ContentFolderEntryParser(String data) {
+            Map<String, Object> content = (Map<String, Object>)JSON.deserializeUntyped(data);
+            parseContent(content);
+        }
+
+        private void parseContent(Map<String, Object> content) {
+            tag = (String) content.get('.tag');
+            name = (String) content.get('name');
+            path_lower = (String) content.get('path_lower');
+            path_display = (String) content.get('path_display');
+            if (content.get('client_modified') != null) {
+                client_modified = (String) content.get('client_modified');
+            }
+            if (content.get('size') != null) {
+                size = (Long) content.get('size');
+            }
+        }
+    }
+
+    public class DownLoadFileDto {
+        public String path;
     }
 
     public class SearchResultParser {
+
         public String cursor;
         public Boolean has_more;
         public List<SearchSingleResultParser> matches = new List<SearchSingleResultParser>();
@@ -203,8 +190,94 @@ public class Dropbox_Entities {
         }
     }
 
-    // download file
-    public class downLoadFileDto {
+    public class SearchDto {
+        public String query;
+        public Boolean include_highlights;
+        public SearchOptions options;
+    }
+
+    public class SearchOptions {
+       public Integer max_results;
+       public String path;
+       public Boolean filename_only;
+    }
+
+    public class DeleteContentDto {
         public String path;
+    }
+
+    public class GetContentMetadataDto {
+        public Boolean include_deleted;
+        public Boolean include_has_explicit_shared_members;
+        public Boolean include_media_info;
+        public String path;
+    }
+
+    public class DeletedContentBatchDto {
+        public List<DeletedContentPathDto> entries;
+    }
+
+    public class DeletedContentPathDto {
+        public String path;
+    }
+
+    public class AsyncBatchJobIdDto {
+        public String async_job_id;
+    }
+
+    public class GetThumbnailButchEntriesDto {
+        public String path;
+        public String format;
+        public String size;
+    }
+
+    public class GetThumbnailButchEntries {
+        public List<GetThumbnailButchEntry> entries;
+    }
+
+    public class GetThumbnailButchEntry {
+        public GetThumbnailButchEntryMetadata metadata;
+        public String thumbnail;
+    }
+
+    public class GetThumbnailButchEntryMetadata {
+        public String name;
+        public String path_lower;
+        public String path_display;
+        public String id;
+    }
+
+    public class CopyBatchFileEntries {
+        public List<CopyBatchFileEntry> entries;
+        public Boolean autorename;
+    }
+
+    public class CopyBatchFileEntry {
+        public String from_path;
+        public String to_path;
+    }
+
+    public class CopyFileEntry {
+        public String from_path;
+        public String to_path;
+        public Boolean autorename;
+    }
+
+    public class MoveFileEntry {
+        public String from_path;
+        public String to_path;
+        public Boolean autorename;
+        public Boolean allow_ownership_transfer;
+    }
+
+    public class MoveFileEntryBatch {
+        public String from_path;
+        public String to_path;
+    }
+
+    public class MoveFileEntriesBatch {
+        public List<MoveFileEntryBatch> entries;
+        public Boolean autorename;
+        public Boolean allow_ownership_transfer;
     }
 }
