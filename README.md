@@ -1,6 +1,6 @@
 # Dropbox for Salesforce
 
-In Dropbox_Service class there are number of methods that allow to interact with Dropbox api, such as upload file to Dropbox from Salesforce and directly from Javascript. Creating folder in dropbox, getting folder / file info, getting content of a folder info, searching within Dropbox account, downloading file from Dropbox to local machine.
+In Dropbox_Api class there are number of methods that allow to interact with Dropbox api, such as upload file to Dropbox from Salesforce and directly from Javascript. Creating folder in dropbox, getting folder / file info, getting content of a folder info, searching within Dropbox account, downloading file from Dropbox to local machine, etc.
 
 Before configuring Salesforce you must have a Dropbox account and a properly setup connected app in Dropbox account. To create connected app in Dropbox go to https://www.dropbox.com/developers -> App Console -> Create App
 
