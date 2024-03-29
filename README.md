@@ -9,6 +9,7 @@ Begin by installing the required components including Classes, Named Credentials
 Obtaining API Key and Secret: 
 
 Go to Dropbox Developer Console - https://www.dropbox.com/developers/reference/getting-started
+
 Click 'App Console', click 'Create App' if your app has not beed created. Take API key and API secret from your Dropbox connected app.
 
 Setting up Authentication Provider
@@ -24,6 +25,7 @@ For paid team accounts: team_data.member, files.content.write, files.content.rea
 Redirect URIs Configuration: Retrieve the callback URL from the Salesforce Configuration section and add it to the 'Redirect URIs' section of your Dropbox connected app.
 
 Named Credentials Configuration
+
 Edit each of the three credentials. Choose 'Dropbox' as the 'Authentication Provider' and ensure the 'Start Authentication Flow on Save' checkbox is selected.
 
 Save the Named Credentials. The Authentication Status should change from 'Pending' to 'Authenticated'.
