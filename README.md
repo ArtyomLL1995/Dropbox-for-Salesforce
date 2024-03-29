@@ -8,7 +8,8 @@ Begin by installing the required components including Classes, Named Credentials
 
 Obtaining API Key and Secret: 
 
-Go to Dropbox Developer Console, then click 'App Console', click 'Create App' if your app has not beed created. Take API key and API secret from your Dropbox connected app.
+Go to Dropbox Developer Console - https://www.dropbox.com/developers/reference/getting-started
+Click 'App Console', click 'Create App' if your app has not beed created. Take API key and API secret from your Dropbox connected app.
 
 Setting up Authentication Provider
 
