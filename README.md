@@ -1,18 +1,29 @@
 Dropbox API Integration Guide
 
-To seamlessly interact with the Dropbox API within Salesforce, you'll utilize a set of classes designed to facilitate various actions such as uploading files to Dropbox, creating folders, retrieving file/folder information, searching within Dropbox, downloading files locally, and more. Follow these steps to set up the integration properly:
+In the Dropbox_Api class there are methods designed to facilitate various actions such as uploading files to Dropbox, creating folders, retrieving file/folder information, searching within Dropbox, downloading files locally, and more. Follow these steps to set up the integration properly:
+
+Install Necessary Components: 
+
+Begin by installing the required components including Classes, Named Credentials, and Auth Provider in your Salesforce org.
 
 Setting up Authentication Provider
-Install Necessary Components: Begin by installing the required components including Classes, Named Credentials, and Auth Provider in your Salesforce org.
 
 Edit Auth Provider: Navigate to Auth Provider in your org, locate the Dropbox provider, and click 'Edit'. Input the API key and API secret obtained from your Dropbox Connected App.
 
-Obtaining API Key and Secret: Go to Dropbox Developer Console, then click 'App Console', click 'Create App' if your app has not beed created. Ensure you set permission scopes carefully. For free accounts, you'll need files.content.write and files.content.read. For paid team accounts: team_data.member, files.content.write, files.content.read.
+Obtaining API Key and Secret: 
 
-Redirect URIs Configuration: Retrieve the callback URL from the Salesforce Configuration section and add it to the 'Redirect URIs' section of your connected app in the Dropbox Developer Console.
+Go to Dropbox Developer Console, then click 'App Console', click 'Create App' if your app has not beed created. Take API key and API secret from your Dropbox connected app.
+
+Ensure you set permission scopes carefully. 
+
+For free accounts, you'll need files.content.write and files.content.read.
+
+For paid team accounts: team_data.member, files.content.write, files.content.read.
+
+Redirect URIs Configuration: Retrieve the callback URL from the Salesforce Configuration section and add it to the 'Redirect URIs' section of your Dropbox connected app.
 
 Named Credentials Configuration
-Edit Named Credentials: Access Named Credentials and edit each of the three credentials. Choose 'Dropbox' as the 'Authentication Provider' and ensure the 'Start Authentication Flow on Save' checkbox is selected.
+Edit each of the three credentials. Choose 'Dropbox' as the 'Authentication Provider' and ensure the 'Start Authentication Flow on Save' checkbox is selected.
 
 Save the Named Credentials. The Authentication Status should change from 'Pending' to 'Authenticated'.
 
