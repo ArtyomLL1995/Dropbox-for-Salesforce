@@ -1,11 +1,11 @@
-public class Dropbox_Utils {
+public with sharing class Dropbox_Utils {
+    
+    public Enum EncryptionTypes { ENCRYPT, DECRYPT }
+    //public Enum AccessTokenTypes { ACCESS_TOKEN, REFRESH_TOKEN }
 
     public static final String GET = 'GET';
     public static final String POST = 'POST';
-
-    public static final String BASE_URL = 'https://api.dropboxapi.com';
-    public static final String BASE_URL_V2 = 'https://api.dropboxapi.com/2';
-    public static final String CONTENT_URL = 'https://content.dropboxapi.com/2';
+    public static final String TEAM_ACCESS_ERROR = 'This API function operates on a single Dropbox account, but the OAuth 2 access token you provided is for an entire Dropbox Business team.';
     
     public static final String ACCESS_TOKEN = '/oauth2/token';
     public static final String FILES_UPLOAD = '/files/upload';
@@ -25,9 +25,12 @@ public class Dropbox_Utils {
     public static final String GET_THUMBNAIL  = '/files/get_thumbnail';
     public static final String GET_THUMBNAIL_BATCH = '/files/get_thumbnail_batch';
     public static final String SEARCH = '/files/search_v2';
+    public static final String SEARCH_CONTINUE = '/files/search/continue_v2';
     public static final String COPY = '/files/copy_v2';
     public static final String COPY_BATCH = '/files/copy_batch_v2';
     public static final String COPY_BATCH_CHECK = '/files/copy_batch/check_v2';
     public static final String CONTENT_METADATA = '/files/get_metadata';
-    public static final String GET_TEAM_MEMBER_ID = '/team/members/list';
+    public static final String FILE_PREVIEW = '/files/get_preview';
+    public static final String TEAM_MEMBERS = '/team/members/list';
+
 }

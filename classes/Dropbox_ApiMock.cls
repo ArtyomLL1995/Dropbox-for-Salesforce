@@ -1,9 +1,7 @@
 @isTest
-public class Dropbox_ApiMock implements HttpCalloutMock {
+public with sharing class Dropbox_ApiMock implements HttpCalloutMock {
     public HTTPResponse respond(HTTPRequest req) {
-        String reqBody = req.getBody();
         String endPoint = req.getEndpoint();
-        String authorization = req.getHeader('Authorization');
         HTTPResponse res = new HTTPResponse();
         if (endPoint.endsWith(Dropbox_Utils.ACCESS_TOKEN)) {
             Map<String, Object> responseMap = new Map<String, Object>();

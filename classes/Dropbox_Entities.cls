@@ -7,6 +7,13 @@ public class Dropbox_Entities {
         public String clientId;
         public String clientSecret;
         public String rootId;
+        public String accountId;
+        public String teamId;
+        public String scope;
+        public String selectUserId;
+        @AuraEnabled public String email;
+        @AuraEnabled public String accessInfoId;
+        @AuraEnabled public Boolean currentActiveAccessInfo;
     }
 
     public class UploadFileDto {
@@ -72,6 +79,7 @@ public class Dropbox_Entities {
 
     public class RootInfoDto {
         public String root_namespace_id;
+        public String home_namespace_id;
     }
 
     public class AccountNameInfo {
@@ -89,6 +97,12 @@ public class Dropbox_Entities {
     public class ProfileDto {
         public String team_member_id;
         public String email;
+        public String root_folder_id;
+        public ProfileName name;
+    }
+
+    public class ProfileName {
+        public String display_name;
     }
 
     public class ContentFolderParser {
@@ -114,6 +128,7 @@ public class Dropbox_Entities {
         public String path_lower;
         public String path_display;
         public String client_modified;
+        public String shared_folder_id;
         public Long size;
 
         public ContentFolderEntryParser(Map<String, Object> content) {
@@ -135,6 +150,9 @@ public class Dropbox_Entities {
             }
             if (content.get('size') != null) {
                 size = (Long) content.get('size');
+            }
+            if (content.get('shared_folder_id') != null) {
+                shared_folder_id = (String) content.get('shared_folder_id');
             }
         }
     }

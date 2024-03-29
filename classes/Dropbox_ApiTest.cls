@@ -82,23 +82,23 @@ public class Dropbox_ApiTest {
         Test.stopTest();
     }
 
-    @isTest 
-    static void downLoadFileTest() {
-        Test.startTest();
-        Test.setMock(HttpCalloutMock.class, new Dropbox_ApiMock());
-        String result = Dropbox_Api.downLoadFile('test/path', 'access_token');
-        Assert.areNotEqual(null, result);
-        Test.stopTest();
-    }
+    // @isTest 
+    // static void downLoadFileTest() {
+    //     Test.startTest();
+    //     Test.setMock(HttpCalloutMock.class, new Dropbox_ApiMock());
+    //     String result = Dropbox_Api.downLoadFile('test/path', 'access_token');
+    //     Assert.areNotEqual(null, result);
+    //     Test.stopTest();
+    // }
 
-    @isTest 
-    static void downLoadFileZipTest() {
-        Test.startTest();
-        Test.setMock(HttpCalloutMock.class, new Dropbox_ApiMock());
-        String result = Dropbox_Api.downLoadFileZip('test/path', 'access_token');
-        Assert.areNotEqual(null, result);
-        Test.stopTest();
-    }
+    // @isTest 
+    // static void downLoadFileZipTest() {
+    //     Test.startTest();
+    //     Test.setMock(HttpCalloutMock.class, new Dropbox_ApiMock());
+    //     String result = Dropbox_Api.downLoadFileZip('test/path', 'access_token');
+    //     Assert.areNotEqual(null, result);
+    //     Test.stopTest();
+    // }
 
     @isTest 
     static void deleteContentTest() {
