@@ -6,13 +6,13 @@ Install Necessary Components:
 
 Begin by installing the required components including Classes, Named Credentials, and Auth Provider in your Salesforce org.
 
-Setting up Authentication Provider
-
-Edit Auth Provider: Navigate to Auth Provider in your org, locate the Dropbox provider, and click 'Edit'. Input the API key and API secret obtained from your Dropbox Connected App.
-
 Obtaining API Key and Secret: 
 
 Go to Dropbox Developer Console, then click 'App Console', click 'Create App' if your app has not beed created. Take API key and API secret from your Dropbox connected app.
+
+Setting up Authentication Provider
+
+Edit Auth Provider: Navigate to Auth Provider in your org, locate the Dropbox provider, and click 'Edit'. Input the API key and API secret obtained from your Dropbox Connected App.
 
 Ensure you set permission scopes carefully. 
 
