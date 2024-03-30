@@ -10,7 +10,7 @@ public with sharing class Dropbox_Api {
     // Dropbox_Entities.TeamMemberDto teamMemberInfo = Dropbox_Api.getTeamMember(Your target Dropbox user email);
     // dropboxAPISelectUser = teamMemberInfo.profile.team_member_id;
 
-    bublic static String dropboxAPISelectUser; // 'Your API Select user from Dropbox'
+    public static String dropboxAPISelectUser; // 'Your API Select user from Dropbox'
 
     // ----------------------------------------------------------------------------------------
 
