@@ -30,6 +30,7 @@ public with sharing class Dropbox_Api {
     private static final String dropBoxApiPathRoot = '{".tag": "root", "root": "' + pathRootId +'"}';
 
     // Method to get access token direclty (if using named credentials + auth provider not possible / not working)
+    // More info here https://developers.dropbox.com/oauth-guide
     public static Dropbox_Entities.AccessTokenDto getAccessToken(String clientId, String clientSecret, String verificationCode, String refreshToken) {
 
         Dropbox_Entities.AccessTokenDto result;
