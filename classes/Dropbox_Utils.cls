@@ -1,7 +1,4 @@
 public with sharing class Dropbox_Utils {
-    
-    public Enum EncryptionTypes { ENCRYPT, DECRYPT }
-    //public Enum AccessTokenTypes { ACCESS_TOKEN, REFRESH_TOKEN }
 
     public static final String GET = 'GET';
     public static final String POST = 'POST';
