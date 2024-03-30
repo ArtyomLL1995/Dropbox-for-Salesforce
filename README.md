@@ -12,15 +12,16 @@ Go to Dropbox Developer Console - https://www.dropbox.com/developers/reference/g
 
 Click 'App Console', click 'Create App' if your app has not beed created. Take API key and API secret from your Dropbox connected app.
 
-Setting up Authentication Provider
-
-Edit Auth Provider: Navigate to Auth Provider in your org, locate the Dropbox provider, and click 'Edit'. Input the API key and API secret obtained from your Dropbox Connected App.
-
 Ensure you set permission scopes carefully. 
 
 For free accounts, you'll need files.content.write and files.content.read.
 
 For paid team accounts: team_data.member, files.content.write, files.content.read.
+
+
+Setting up Authentication Provider
+
+Edit Auth Provider: Navigate to Auth Provider in your org, locate the Dropbox provider, and click 'Edit'. Input the API key and API secret obtained from your Dropbox Connected App.
 
 Redirect URIs Configuration: Retrieve the callback URL from the Salesforce Configuration section and add it to the 'Redirect URIs' section of your Dropbox connected app.
 
