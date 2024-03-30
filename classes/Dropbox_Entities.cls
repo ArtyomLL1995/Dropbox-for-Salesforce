@@ -38,10 +38,6 @@ public class Dropbox_Entities {
         public Boolean autorename;
     }
 
-    public class DeleteFolderDto {
-        public String path;
-    }
-
     public class CreatedFolderInfoDto {
         public CreatedFolderMetadataDto metadata;
     }
@@ -51,13 +47,6 @@ public class Dropbox_Entities {
         public String path_lower;
         public String path_display;
         public String id;
-    }
-
-    public class GetFolderMetadataDto {
-        public Boolean include_deleted;
-        public Boolean include_has_explicit_shared_members;
-        public Boolean include_media_info;
-        public String path;
     }
 
     public class GetContentFolderDto {
