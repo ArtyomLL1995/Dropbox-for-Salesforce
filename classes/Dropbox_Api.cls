@@ -29,8 +29,10 @@ public with sharing class Dropbox_Api {
 
     private static final String dropBoxApiPathRoot = '{".tag": "root", "root": "' + pathRootId +'"}';
 
+
     // Method to get access token direclty (if using named credentials + auth provider not possible / not working)
     // More info here https://developers.dropbox.com/oauth-guide
+
     public static Dropbox_Entities.AccessTokenDto getAccessToken(String clientId, String clientSecret, String verificationCode, String refreshToken) {
 
         Dropbox_Entities.AccessTokenDto result;
@@ -346,7 +348,7 @@ public with sharing class Dropbox_Api {
         }
     }
 
-    // Delets single folder or file under specified path
+    // Deletes single folder or file under specified path
     public static void deleteContent(String path, String accessToken) {
 
         Dropbox_Entities.DeleteContentDto contentToDelete = new Dropbox_Entities.DeleteContentDto();
@@ -369,7 +371,7 @@ public with sharing class Dropbox_Api {
         } 
     }
 
-    // Delets several folders and/or file under specified paths
+    // Deletes several folders and/or files under specified paths
     public static String deleteContentBatch(Dropbox_Entities.DeletedContentBatchDto entries, String accessToken) {
 
         String result;
@@ -397,7 +399,7 @@ public with sharing class Dropbox_Api {
         return result;
     }
 
-    // Check delete status
+    // Checks delete status
     public static String checkDeleteBatch(String jobId, String accessToken) {
 
         String result;
@@ -425,7 +427,7 @@ public with sharing class Dropbox_Api {
         return result;
     }
     
-    // Returns info about single file or folder specified in the 'path' param
+    // Returns info about single file or folder under specified path
     public static Dropbox_Entities.ContentFolderEntryParser getContentMetadata(String path, String accessToken) {
 
         Dropbox_Entities.ContentFolderEntryParser result;
@@ -456,7 +458,7 @@ public with sharing class Dropbox_Api {
         return result;
     }
 
-    // Returns info about ALL files and/or folders under folder which path is specified in the 'path' param
+    // Returns info about ALL files and/or folders under specified path
     public static Dropbox_Entities.ContentFolderParser getContentOfAFolder(String path, String accessToken) {
 
         Dropbox_Entities.ContentFolderParser result;
@@ -501,7 +503,7 @@ public with sharing class Dropbox_Api {
         return result;
     }
 
-    // Returns info about all files and/or folders under folder according to cursor
+    // Returns info about all files and/or folders under specified cursor
     public static Dropbox_Entities.ContentFolderParser getNextContentOfAFolder(String accessToken, String cursor) {
 
         Dropbox_Entities.ContentFolderParser result;
@@ -530,7 +532,7 @@ public with sharing class Dropbox_Api {
         return result;
     }
 
-    // Returns team member id of a user by the Dropbdox user email
+    // Returns team member id of a user under specified Dropbdox user email
     public static Dropbox_Entities.TeamMemberDto getTeamMember(String userEmail, String accessToken) {
 
         Dropbox_Entities.TeamMemberDto result;
@@ -683,7 +685,7 @@ public with sharing class Dropbox_Api {
         }
     }
     
-    // Get preview link for a img file (supports png, jpg, jpeg file formats)
+    // Gets preview link for an img file (supports png, jpg, jpeg file formats)
     public static String getTemporaryLink(String filePath, String accessToken) {
 
         Map<String, String> headers = createHeaders('application/json', accessToken, null);
@@ -707,10 +709,16 @@ public with sharing class Dropbox_Api {
         }
     }
 
-    // Get single thumbnail image for file
+    // Gets single thumbnail image for a file under specified path
     public static String getThumbnail(String path, String accessToken) {
         Map<String, String> headers = createHeaders('application/json', accessToken, '{"path":"/' + path + '"}');
-        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest('callout:Dropbox_Content_URL' + Dropbox_Utils.GET_THUMBNAIL, Dropbox_Utils.GET, headers, null, null);
+        HTTPResponse res = Dropbox_HttpRequestGenerator.generateRequest(
+            'callout:Dropbox_Content_URL' + Dropbox_Utils.GET_THUMBNAIL, 
+            Dropbox_Utils.GET, 
+            headers, 
+            null, 
+            null
+        );
         if (res.getStatusCode() == 200) {
             return EncodingUtil.base64Encode(res.getBodyAsBlob());
         } else {
@@ -718,7 +726,7 @@ public with sharing class Dropbox_Api {
         }
     }
 
-    // Get thumbnail images for files up to 25 images in a batch
+    // Gets thumbnail images for files up to 25 images in a batch under specified paths
     public static Dropbox_Entities.GetThumbnailButchEntries getThumbnailBatch(List<Dropbox_Entities.GetThumbnailButchEntriesDto> filePaths, String accessToken) {
 
         // Create a JSON payload with the list of file IDs
@@ -745,7 +753,7 @@ public with sharing class Dropbox_Api {
         }
     }
 
-    // Get preview for not img files (supports excel, csv, doxc, doc, and other text formats)
+    // Gets preview for not img files (supports excel, csv, doxc, doc, and other text formats) under specified path
     public static String getFilePreview(String path, String accessToken) {
 
         Map<String, String> apiArg = new Map<String, String>();
