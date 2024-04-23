@@ -2,13 +2,13 @@
 
 In the Dropbox_Api class there are methods designed to facilitate various actions such as uploading files to Dropbox, creating folders, retrieving file/folder information, searching within Dropbox, downloading files locally, and more. Follow these steps to set up the integration properly:
 
-Install Necessary Components: 
+## Install Necessary Components: 
 
 Begin by installing the required components including Classes, Named Credentials, and Auth Provider in your Salesforce org.
 
-Obtaining API Key and Secret: 
+## Obtaining API Key and Secret: 
 
-Go to Dropbox Developer Console - https://www.dropbox.com/developers/reference/getting-started
+Go to [Dropbox Developer Console](https://www.dropbox.com/developers/reference/getting-started)
 
 Click 'App Console', click 'Create App' if your app has not beed created. Take API key and API secret from your Dropbox connected app.
 
