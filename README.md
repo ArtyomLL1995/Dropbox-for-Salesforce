@@ -8,15 +8,15 @@ Begin by installing the required components including Classes, Named Credentials
 
 ## Obtaining API Key and Secret: 
 
-Go to [Dropbox Developer Console](https://www.dropbox.com/developers/reference/getting-started)
+1.Go to [Dropbox Developer Console](https://www.dropbox.com/developers/reference/getting-started)
 
-Click 'App Console', click 'Create App' if your app has not beed created. Take API key and API secret from your Dropbox connected app.
+2.Click 'App Console', click 'Create App' if your app has not beed created. Take API key and API secret from your Dropbox connected app.
 
-Ensure you set permission scopes carefully. 
+## Ensure you set permission scopes carefully. 
 
-For free accounts, you'll need files.content.write and files.content.read.
+* For free accounts, you'll need files.content.write and files.content.read.
 
-For paid team accounts: team_data.member, files.content.write, files.content.read.
+* For paid team accounts: team_data.member, files.content.write, files.content.read.
 
 
 Setting up Authentication Provider
