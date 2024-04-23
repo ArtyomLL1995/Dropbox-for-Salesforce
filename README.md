@@ -1,4 +1,4 @@
-Dropbox API Integration Guide
+###Dropbox API Integration Guide
 
 In the Dropbox_Api class there are methods designed to facilitate various actions such as uploading files to Dropbox, creating folders, retrieving file/folder information, searching within Dropbox, downloading files locally, and more. Follow these steps to set up the integration properly:
 
