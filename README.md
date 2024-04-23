@@ -4,7 +4,7 @@ In the Dropbox_Api class there are methods designed to facilitate various action
 
 ## Install Necessary Components: 
 
-Begin by installing the required components including Classes, Named Credentials, and Auth Provider in your Salesforce org.
+Begin by installing the required components including Classes, Named Credentials, and Auth.Provider in your Salesforce org.
 
 ## Obtaining API Key and Secret: 
 
@@ -21,11 +21,11 @@ Begin by installing the required components including Classes, Named Credentials
 
 ## Setting up Authentication Provider
 
-Edit Auth Provider: Navigate to Auth Provider in your org, locate the Dropbox provider, and click 'Edit'. Input the API key and API secret obtained from your Dropbox Connected App.
+Edit Auth.Provider: Navigate to 'Auth.Provider' in your org, locate the 'Dropbox' provider, and click 'Edit'. Input the API key and API secret obtained from your Connected App from Dropbox.
 
 ## Redirect URIs Configuration
 
-Retrieve the callback URL from the Salesforce Configuration section and add it to the 'Redirect URIs' section of your Dropbox connected app.
+Retrieve the callback URL from the 'Salesforce Configuration' section and add it to the 'Redirect URIs' section of your Dropbox connected app.
 
 ## Named Credentials Configuration
 
@@ -38,7 +38,6 @@ Save the Named Credentials. The Authentication Status should change from 'Pendin
 Once the setup is complete and authentication is successful, you'll have access to the Dropbox API through the provided classes. These classes will enable you to perform various operations seamlessly.
 
 ## Custom Implementation
-Alternatively, you can create your own set of classes based on https://www.dropbox.com/developers/documentation/http/documentation
-Customize and adapt these classes to fit your specific requirements, ensuring error handling and readability are maintained throughout the implementation.
+Alternatively, you can create your own set of classes based on [Dropbox Documentation](https://www.dropbox.com/developers/documentation/http/documentation)
 
 
